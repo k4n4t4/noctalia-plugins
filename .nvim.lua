@@ -1,13 +1,20 @@
-local cwd = vim.fn.getcwd()
+local root_dir = vim.fn.getcwd()
 
-vim.lsp.config('luau_lsp', {
+return {
+    cmd = {
+        "luau-lsp",
+        "lsp",
+        "--definitions:@noctalia=" .. root_dir .. "/noctalia.d.luau",
+    },
     settings = {
-        ['luau-lsp'] = {
-            types = {
-                definitionFiles = {
-                    cwd .. '/noctalia.d.luau',
-                },
+        ["luau-lsp"] = {
+            ignoreGlobs = { "**/*.d.luau" },
+            platform = {
+                type = "standard",
+            },
+            sourcemap = {
+                enabled = false,
             },
         },
     },
-})
+}
